@@ -2,8 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
-const productRouter = require('./routers/product');
-const userRouter = require('./routers/user');
+const productRouter = require('./routers/product.js');
+const userRouter = require('./routers/user.js');
+const orderRouter = require('./routers/order.js');
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/amazona', {
 
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
+app.use('/api/orders', orderRouter);
 
 app.get('/', (req, res) => {
     res.send('Server is ready!');
