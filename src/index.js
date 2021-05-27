@@ -1,10 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
+const path = require('path');
 const dotenv = require('dotenv');
 const productRouter = require('./routers/product.js');
 const userRouter = require('./routers/user.js');
 const orderRouter = require('./routers/order.js');
+const uploadRouter = require('./routers/upload.js');
 
 dotenv.config();
 
@@ -26,6 +27,9 @@ app.use('/api/orders', orderRouter);
 app.get('/api/config/paypal', (req, res) => {
     res.send(process.env.PAYPAL_CLIENT_ID || 'sb');
 });
+
+const __dirname = path.resolve();
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
 app.get('/', (req, res) => {
     res.send('Server is ready!');
