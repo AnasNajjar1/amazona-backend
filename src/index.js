@@ -7,11 +7,13 @@ const userRouter = require('./routers/user.js');
 const orderRouter = require('./routers/order.js');
 const uploadRouter = require('./routers/upload.js');
 
-dotenv.config();
+
 
 const app = express();
+dotenv.config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 
 
 
@@ -51,4 +53,6 @@ const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
     console.log(`Serve at http://localhost:${port}`);
-})
+});
+
+mongoose.set('useFindAndModify', false);
