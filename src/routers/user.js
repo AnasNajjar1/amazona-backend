@@ -8,6 +8,11 @@ const { isAuth, isAdmin } = require('../utils');
 
 const userRouter = express.Router();
 
+userRouter.get('/', expressAsyncHandler(async (req, res) => {
+    const availableUsers = await User.find({});
+    res.send({ availableUsers });
+}));
+
 userRouter.get('/seed', expressAsyncHandler(async (req, res) => {
     // await User.remove({});
     const createdUsers = await User.insertMany(data.users);
