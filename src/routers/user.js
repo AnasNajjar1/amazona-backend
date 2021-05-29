@@ -4,6 +4,7 @@ const data = require('../data');
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 const { generateToken } = require('../utils');
+const { isAuth, isAdmin } = require('../utils');
 
 const userRouter = express.Router();
 
