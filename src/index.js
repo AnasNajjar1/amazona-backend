@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
+const cors = require('cors');
 const dotenv = require('dotenv');
 const productRouter = require('./routers/product.js');
 const userRouter = require('./routers/user.js');
@@ -11,6 +12,7 @@ const uploadRouter = require('./routers/upload.js');
 
 const app = express();
 dotenv.config();
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
