@@ -7,7 +7,7 @@ const orderRouter = express.Router();
 
 orderRouter.get('/', isAuth, isAdmin,  expressAsyncHandler(async (req, res) => {
     const orders = await Order.find({});
-    
+    res.send(orders);
 }));
 
 orderRouter.get('/mine', isAuth, expressAsyncHandler(async (req, res) => {
