@@ -66,7 +66,7 @@ userRouter.put('/profile', isAuth, expressAsyncHandler(async (req, res) => {
         if(req.body.password) {
             user.password = bcrypt.hashSync(req.body.password, 8);
         }
-        const updatedUser = await user.save;
+        const updatedUser = await user.save();
         res.send({
             _id: updatedUser._id,
             name: updatedUser.name,
