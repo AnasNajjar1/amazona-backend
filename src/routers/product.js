@@ -38,8 +38,8 @@ productRouter.post('/', isAuth, isAdmin, expressAsyncHandler(async (req, res) =>
         numReviews: 0,
         description: 'sample description'
     });
-    const createdProduct = product.save();
-    res.send({ message: 'Product Created', product: createdProduct });
+    const createdProduct = await product.save();
+    res.status(201).send({ message: 'Product Created', product: createdProduct });
 }));
 
 productRouter.put('/:id', isAuth, isAdmin, expressAsyncHandler(async (req, res) => {
