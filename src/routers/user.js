@@ -77,4 +77,9 @@ userRouter.put('/profile', isAuth, expressAsyncHandler(async (req, res) => {
     }
 }));
 
+userRouter.get('/', isAuth, isAdmin, expressAsyncHandler(async (req, res) => {
+    const users = await User.find({});
+    res.status(200).send(users);
+}));
+
 module.exports = userRouter;
