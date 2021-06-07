@@ -5,7 +5,7 @@
   "description": "Amazona Backend",
   "main": "index.js",
   "scripts": {
-    "start": "node ./src/index.js"
+    "start": "nodemon ./src/index.js"
   },
   "author": "Anas Najjar",
   "license": "ISC",
