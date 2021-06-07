@@ -2,14 +2,11 @@ const express = require('express');
 const expressAsyncHandler = require('express-async-handler');
 const data = require('../data');
 const Product = require('../models/product');
-const { isAuth, isAdmin, isSellerOrAdmin } = require('../utils');
+const { isAuth, isAdmin } = require('../utils');
 
 const productRouter = express.Router();
 
 productRouter.get('/', expressAsyncHandler(async (req, res) => {
-    // const seller = req.query.seller || '';
-    // const sellerFilter = seller? { seller } : {};
-    // const products = await Product.find({...sellerFilter}).populate('seller', 'seller.name seller.logo');
     const products = await Product.find({});
     res.send(products);
 }));
@@ -21,7 +18,7 @@ productRouter.get('/seed', expressAsyncHandler(async (req, res) => {
 }));
 
 productRouter.get('/:id', expressAsyncHandler(async (req, res) => {
-    const product = await Product.findById(req.params.id).populate('seller', 'seller.name seller.logo seller.rating seller.numReviews');;
+    const product = await Product.findById(req.params.id);
     if(product) {
         res.send(product);
     } else {
@@ -29,10 +26,9 @@ productRouter.get('/:id', expressAsyncHandler(async (req, res) => {
     }
 }));
 
-productRouter.post('/', isAuth, isSellerOrAdmin, expressAsyncHandler(async (req, res) => {
+productRouter.post('/', isAuth, isAdmin, expressAsyncHandler(async (req, res) => {
     const product = new Product({
         name: 'sample name' + Date.now(),
-        seller: req.user._id,
         image: '/images/p1.jpg',
         price: 0,
         category: 'sample category',
@@ -46,7 +42,7 @@ productRouter.post('/', isAuth, isSellerOrAdmin, expressAsyncHandler(async (req,
     res.status(201).send({ message: 'Product Created', product: createdProduct });
 }));
 
-productRouter.put('/:id', isAuth, isSellerOrAdmin, expressAsyncHandler(async (req, res) => {
+productRouter.put('/:id', isAuth, isAdmin, expressAsyncHandler(async (req, res) => {
     const productId = req.params.id;
     const product = await Product.findById(productId);
     if(product) {

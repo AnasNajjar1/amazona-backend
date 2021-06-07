@@ -5,8 +5,7 @@ exports.generateToken = (user) => {
                         _id: user._id,
                         name: user.name,
                         email: user.email,
-                        isAdmin: user.isAdmin,
-                        isSeller: user.isSeller,
+                        isAdmin: user.isAdmin
                     }, 
                     process.env.JWT_SECRET || 'secretcode', {
                         expiresIn: '30d'
@@ -36,19 +35,5 @@ exports.isAdmin = (req, res, next) => {
     } else {
         res.status(401).send({ message: 'Invalid Admin Token' });
     }
-};
+}
 
-exports.isSeller = (req, res, next) => {
-    if(req.user && req.user.isSeller) {
-        next();
-    } else {
-        res.status(401).send({ message: 'Invalid Seller Token' });
-    }
-};
-exports.isSellerOrAdmin = (req, res, next) => {
-    if(req.user && (req.user.isSeller || req.user.isAdmin)) {
-        next();
-    } else {
-        res.status(401).send({ message: 'Invalid Admin/Seller Token' });
-    }
-};
