@@ -9,10 +9,11 @@ const productRouter = express.Router();
 productRouter.get('/', expressAsyncHandler(async (req, res) => {
     const seller = req.query.seller || '';
     const sellerFilter = seller? { seller } : {};
+    var products = null;
     if(seller != '') {
-        const products = await Product.find({...sellerFilter}).populate('seller', 'seller.name seller.logo');
+        products = await Product.find({...sellerFilter}).populate('seller', 'seller.name seller.logo');
     } else {
-        const products = await Product.find({});
+        products = await Product.find({});
     }
     res.send(products);
 }));
