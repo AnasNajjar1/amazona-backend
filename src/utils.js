@@ -35,5 +35,5 @@ exports.isAdmin = (req, res, next) => {
     } else {
         res.status(401).send({ message: 'Invalid Admin Token' });
     }
-}
+};
 
