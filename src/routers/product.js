@@ -7,14 +7,10 @@ const { isAuth, isAdmin, isSellerOrAdmin } = require('../utils');
 const productRouter = express.Router();
 
 productRouter.get('/', expressAsyncHandler(async (req, res) => {
-    const seller = req.query.seller || '';
-    const sellerFilter = seller? { seller } : {};
-    var products = null;
-    if(seller != '') {
-        products = await Product.find({...sellerFilter}).populate('seller', 'seller.name seller.logo');
-    } else {
-        products = await Product.find({});
-    }
+    // const seller = req.query.seller || '';
+    // const sellerFilter = seller? { seller } : {};
+    // const products = await Product.find({...sellerFilter}).populate('seller', 'seller.name seller.logo');
+    const products = await Product.find({});
     res.send(products);
 }));
 
