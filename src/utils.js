@@ -5,7 +5,8 @@ exports.generateToken = (user) => {
                         _id: user._id,
                         name: user.name,
                         email: user.email,
-                        isAdmin: user.isAdmin
+                        isAdmin: user.isAdmin,
+                        isSeller: user.isSeller
                     }, 
                     process.env.JWT_SECRET || 'secretcode', {
                         expiresIn: '30d'
