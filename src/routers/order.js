@@ -23,8 +23,15 @@ orderRouter.post('/', isAuth, expressAsyncHandler(async(req, res) => {
     if(req.body.orderItems.length === 0) {
         res.status(400).send({ message: 'Cart is empty' });
     } else {
+        let sellersList = [];
+        for(let orderItem of req.body.orderItems) {
+            const sellerItem = sellersList.find(s => s ==  orderItem.seller);
+            if(!sellerItem) {
+                sellersList.push(orderItem.seller);
+            }
+        }
         const order = new Order({
-            seller: req.body.orderItems[0].seller,
+            sellers: sellersList,
             orderItems: req.body.orderItems,
             shippingAddress: req.body.shippingAddress,
             paymentMethod: req.body.paymentMethod,
