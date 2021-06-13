@@ -8,18 +8,11 @@ const productRouter = express.Router();
 
 productRouter.get('/', expressAsyncHandler(async (req, res) => {
 
-    const pageSize = 3;
-    const page = Number(req.query.pageNumber) || 1;
-
     const seller = req.query.seller || '';
     const sellerFilter = seller? { seller } : {};
 
-    const count = await Product.count({...sellerFilter});
-
-    const products = await Product.find({...sellerFilter}).populate('seller', 'seller.name seller.logo')
-    .skip(pageSize * (page -1)).limit(pageSize);
-
-    res.send({products, page, pages: Math.ceil(count / pageSize)});
+    const products = await Product.find({...sellerFilter}).populate('seller', 'seller.name seller.logo');
+    res.send({products});
 }));
 
 productRouter.get('/seed', expressAsyncHandler(async (req, res) => {
