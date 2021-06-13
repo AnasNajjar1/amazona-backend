@@ -34,14 +34,14 @@ userRouter.post('/signin', expressAsyncHandler(async (req, res) => {
 
 
 userRouter.post('/register', expressAsyncHandler(async (req, res) => {
-    const user = new User({ name: req.body.name, email: req.body.email, password: bcrypt.hashSync(req.body.password, 8) });
+    const user = new User({ name: req.body.name, email: req.body.email, password: bcrypt.hashSync(req.body.password, 8), isSeller: req.body.isSeller });
     const createdUser = await user.save();
     res.send({
         id: createdUser.id,
         name: createdUser.name,
         email: createdUser.email,
         isAdmin: createdUser.isAdmin,
-        isSeller: user.isSeller,
+        isSeller: createdUser.isSeller,
         token: generateToken(createdUser)
     });
 }));
