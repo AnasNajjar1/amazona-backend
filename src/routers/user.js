@@ -61,7 +61,6 @@ userRouter.put('/profile', isAuth, expressAsyncHandler(async (req, res) => {
         user.name = req.body.name || user.name;
         user.email = req.body.email || user.email;
         if(user.isSeller) {
-            user.seller.name = req.body.sellerName || user.seller.name;
             user.seller.logo = req.body.sellerLogo || user.seller.logo;
             user.seller.description = req.body.sellerDescription || user.seller.description;
         }
