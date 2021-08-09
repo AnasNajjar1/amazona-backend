@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const categoryRouter = require('./routers/category.js');
 const productRouter = require('./routers/product.js');
 const userRouter = require('./routers/user.js');
 const orderRouter = require('./routers/order.js');
@@ -34,6 +35,7 @@ mongoose.connect(process.env.DATABASE_URL, {
 
 app.use('/api/uploads', uploadRouter);
 app.use('/api/users', userRouter);
+app.use('/api/categories', categoryRouter);
 app.use('/api/products', productRouter);
 app.use('/api/orders', orderRouter);
 

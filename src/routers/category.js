@@ -1,7 +1,7 @@
 const express = require('express');
 const expressAsyncHandler = require('express-async-handler');
 const Category = require('../models/category');
-const { isAuth, isAdmin, isSellerOrAdmin } = require('../utils');
+const { isAuth, isAdmin } = require('../utils');
 
 const categoryRouter = express.Router();
 
