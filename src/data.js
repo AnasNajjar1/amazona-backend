@@ -82,6 +82,12 @@ const data = {
             numReviews: 10,
             description: 'high quality product'
         }
+    ],
+    categories: [
+        {
+            name: 'Sample Category',
+            image: '/images/p1.jpg',
+        },
     ]
 }
 

@@ -1,6 +1,7 @@
 const express = require('express');
 const expressAsyncHandler = require('express-async-handler');
 const Category = require('../models/category');
+const data = require('../data');
 const { isAuth, isAdmin } = require('../utils');
 
 const categoryRouter = express.Router();
@@ -15,6 +16,12 @@ categoryRouter.get('/', expressAsyncHandler(async (req, res) => {
     const categories = await Category.find({}).skip(pageSize * (page - 1)).limit(pageSize);;
     res.send({ categories, page, pages: Math.ceil(count / pageSize) });
 
+}));
+
+categoryRouter.get('/seed', expressAsyncHandler(async (req, res) => {
+    // await Category.remove({});
+    const createdCategories = await Category.insertMany(data.categories);
+    res.send({ createdCategories });
 }));
 
 categoryRouter.get('/:id', expressAsyncHandler(async (req, res) => {
