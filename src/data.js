@@ -88,6 +88,10 @@ const data = {
             name: 'Sample Category',
             image: '/images/p1.jpg',
         },
+        {
+            name: 'Sample Category 1',
+            image: '/images/p1.jpg',
+        },
     ]
 }
 
