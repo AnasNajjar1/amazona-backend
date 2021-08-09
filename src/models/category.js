@@ -5,10 +5,11 @@ const categorySchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    categoryImage: {
+    image: {
         type: String
     }
 
 }, { timestamps: true });
 
-module.exports = mongoose.model('Category', categorySchema);
+const Category = mongoose.model("Category", categorySchema);
+module.exports = Category;
