@@ -13,7 +13,7 @@ const productSchema = new mongoose.Schema({
     seller: {type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     image:  { type: String, required: true },
     brand:  { type: String, required: true },
-    category:  { type: String, required: true },
+    category:  {type: mongoose.Schema.Types.ObjectId, ref: 'Category' },
     description:  { type: String, required: true },
     price: { type: Number, required: true },
     countInStock: { type: Number, required: true },

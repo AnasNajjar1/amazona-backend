@@ -44,7 +44,7 @@ productRouter.get('/seed', expressAsyncHandler(async (req, res) => {
 }));
 
 productRouter.get('/:id', expressAsyncHandler(async (req, res) => {
-    const product = await Product.findById(req.params.id).populate('seller', 'name seller.logo seller.rating seller.numReviews');
+    const product = await Product.findById(req.params.id).populate('seller category', 'name seller.logo seller.rating seller.numReviews category.name');
     if(product) {
         res.send(product);
     } else {
@@ -58,7 +58,7 @@ productRouter.post('/', isAuth, isSellerOrAdmin, expressAsyncHandler(async (req,
         seller: req.user._id,
         image: '/images/p1.jpg',
         price: 0,
-        category: 'sample category',
+        category: '611154dd23d56c001577a054',
         brand: 'sample brand',
         countInStock: 0,
         rating: 1,
