@@ -44,7 +44,7 @@ productRouter.get('/seed', expressAsyncHandler(async (req, res) => {
 }));
 
 productRouter.get('/:id', expressAsyncHandler(async (req, res) => {
-    const product = await Product.findById(req.params.id).populate('seller category', 'name seller.logo seller.rating seller.numReviews category.name');
+    const product = await Product.findById(req.params.id).populate('seller', 'name seller.logo seller.rating seller.numReviews');
     if(product) {
         res.send(product);
     } else {
