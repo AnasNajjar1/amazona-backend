@@ -28,7 +28,7 @@ productRouter.get('/', expressAsyncHandler(async (req, res) => {
 
     const count = await Product.count({ ...sellerFilter, ...nameFilter, ...categoryFilter, ...priceFilter, ...ratingFilter });
  
-    const products = await Product.find({ ...sellerFilter, ...nameFilter, ...categoryFilter, ...priceFilter, ...ratingFilter }).populate('seller', 'seller.name seller.logo').sort(sortOrder).skip(pageSize * (page - 1)).limit(pageSize);
+    const products = await Product.find({ ...sellerFilter, ...nameFilter, ...categoryFilter, ...priceFilter, ...ratingFilter }).populate('seller category', 'seller.name seller.logo category.name').sort(sortOrder).skip(pageSize * (page - 1)).limit(pageSize);
     res.send({products, page, pages: Math.ceil(count / pageSize)});
 }));
 
