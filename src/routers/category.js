@@ -8,13 +8,7 @@ const categoryRouter = express.Router();
 
 categoryRouter.get('/', expressAsyncHandler(async (req, res) => {
 
-    const pageSize = 3;
-    const page = Number(req.query.pageNumber) || 1;
-
-    const count = await Category.count({ });
-
-    const categories = await Category.find({}).skip(pageSize * (page - 1)).limit(pageSize);;
-    res.send({ categories, page, pages: Math.ceil(count / pageSize) });
+    const categories = await Category.find({});
 
 }));
 
